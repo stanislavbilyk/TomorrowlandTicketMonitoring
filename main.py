@@ -1,11 +1,22 @@
 import asyncio
 from playwright.async_api import async_playwright
 import re
+from notifier.telegram_bot import (
+    send_telegram_message
+)
+
+from config import (
+    BOT_TOKEN,
+    CHAT_ID
+)
 
 URL = "https://www.viagogo.com/cz/Festival-Tickets/International-Festivals/Tomorrowland-Festival-Tickets/E-160250858?quantity=1"
 
 TARGET_PRICE = 23000
 TARGET_TICKET = "Magnificent Greens"
+
+
+
 
 
 async def main():
@@ -95,7 +106,11 @@ async def main():
         print(f"Lowest price: {cheapest}")
 
         if cheapest <= TARGET_PRICE:
-            print("BUY NOW")
+            send_telegram_message(
+                BOT_TOKEN,
+                CHAT_ID,
+                f"Ticket found: {cheapest} Kč"
+            )
 
         input("Press Enter to exit...")
 
