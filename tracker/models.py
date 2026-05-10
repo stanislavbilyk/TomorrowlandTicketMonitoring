@@ -5,4 +5,3 @@ class Ticket:
     id: int
     price: float
     type: int
-    buyer: str
